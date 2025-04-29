@@ -136,7 +136,9 @@ int main()
         NewEvents.Dodge();
         break;
     case 4:
-        text_box("You made yourself stronger than before, but same time making Cooler angrier");
+        text_box("You made yourself stronger than before making your Ki go up, but same time making Cooler angrier");
+        NewEvents.RecoverKi(20);
+        NewEvents.getKi();
         break;
     
     default:

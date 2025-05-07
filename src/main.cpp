@@ -11,6 +11,8 @@ Description: This codes uses contructors with default parameters
 using namespace std;
 
 int Decision = 0;
+int *pDecision = &Decision;
+int Race = 0;
 class Events
 {
 private:
@@ -92,7 +94,7 @@ void Decisions()
         special_text_box("4-Charge Ki");
         special_text_box("5-Exit game");
 
-        cin >> Decision;
+        cin >> *pDecision;
 
         if (cin.fail())
         {
@@ -122,11 +124,18 @@ int main()
     text_box("But be careful if you make the mistake of not letting history fluctuate as it should, the consequences can be dire......");
     cin.get();
     system("cls");
+    text_box("Choose your Character");
+    special_text_box("1-Saiyan");
+    special_text_box("2-Namekian");
+    special_text_box("3-Freezer Race");
+    cin >> Race;
+    system("cls");
+
     text_box("Cooler lunges at you looking to connect a blow!!!!!");
 
     Decisions();
         
-    switch (Decision)
+    switch (*pDecision)
     {
     case 1:
         text_box("You also attacked him, exchanging blows with great aggressiveness, causing a great damage to him, but also a little of damage to you.....");
@@ -162,7 +171,7 @@ int main()
     cin.get();
     system("cls");
 
-    switch (Decision)
+    switch (*pDecision)
     {
     case 1:
         text_box("Just for a moment you escape from Cooler to rest just a moment, but Cooler finds you and wants to Connect another attack!!!");

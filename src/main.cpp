@@ -65,28 +65,72 @@ void RecoverKi(int Value)
 
 };
 
-
+//This function simulates the way text boxes work in a video game and saves a few lines of code
 void text_box(string text)
 {
-    cout << " " << text << "\n"; 
+    cout << text << "\n"; 
 }
 
+//This function is being used to represent the action options within the game
 void special_text_box(string text)
 {
     cout << "|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n";
-    cout << " " << text << "\n"; 
+    cout << text << "\n";
+}
+
+//This function establishes the selected character apart from checking if the player actually selects a playable character
+void CharacterSelection()
+{
+    bool Loop = true;
+    while (Loop)
+    {
+        system("cls");
+        text_box("Choose your Character");
+        special_text_box("1-Saiyan");
+        special_text_box("2-Namekian");
+        special_text_box("3-Freezer Race");
+        cin >> Race;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            system("cls");
+        }
+        
+        if (Race <= 0 || Race >= 4)
+        {
+            system("cls");
+            text_box("You have not chosen any character");
+            cin.ignore();
+            cin.get();
+        }
+        
+        
+        if (Race > 0 && Race < 4)
+        {
+            Loop = false;
+        }
+
+
+    }
+    
 }
 
 Events NewEvents;
 
-void Decisions()
+//This function automates the way the selection boxes for actions are structured.
+void Decisions(string Text)
 {
-    while (true)
+    bool Loop = true;
+    while (Loop)
     {
+        system("cls");
         NewEvents.getLife();
         NewEvents.getKi();
         NewEvents.getStamina();
         
+        text_box(Text);
         text_box("What do you want to do?");
         special_text_box("1-Attack");
         special_text_box("2-Attack from a distance");
@@ -98,20 +142,31 @@ void Decisions()
 
         if (cin.fail())
         {
-            cin.clear();cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(),'\n');
             system("cls");
         }
+        if (*pDecision <= 0 || *pDecision >= 6)
+        {
+            system("cls");
+            text_box("You have not selected any option");
+            cin.ignore();
+            cin.get();
+        }
         else
         {
-            break;
+            Loop = false;
         }
     }
+
 }
 
 
 int main()
 {
+    string KeepTextOfTextBox;
+    string *pKeepTextOfTextBox = &KeepTextOfTextBox;
+    system("cls");
     text_box("You are a time patroller whose duty is to prevent bad people from altering the main time line");
     text_box("they called you to let you know that someone has broken into the sacred timeline in the year 762");
     text_box("when you arrive at the place you get the surprise that Goku will not only face Freezer in the Namek fight");
@@ -123,17 +178,11 @@ int main()
     cout << "\n";
     text_box("But be careful if you make the mistake of not letting history fluctuate as it should, the consequences can be dire......");
     cin.get();
-    system("cls");
-    text_box("Choose your Character");
-    special_text_box("1-Saiyan");
-    special_text_box("2-Namekian");
-    special_text_box("3-Freezer Race");
-    cin >> Race;
+    CharacterSelection();
     system("cls");
 
-    text_box("Cooler lunges at you looking to connect a blow!!!!!");
-
-    Decisions();
+    *pKeepTextOfTextBox = "Cooler lunges at you looking to connect a blow!!!!!";
+    Decisions(*pKeepTextOfTextBox);
         
     switch (*pDecision)
     {
@@ -160,44 +209,39 @@ int main()
     
         exit(0);
         break;
-    
-    default:
-        
-        Decisions();
-        
-        break;
     }
     cin.ignore();
     cin.get();
     system("cls");
-
+    
     switch (*pDecision)
     {
     case 1:
-        text_box("Just for a moment you escape from Cooler to rest just a moment, but Cooler finds you and wants to Connect another attack!!!");
+        *pKeepTextOfTextBox = "Just for a moment you escape from Cooler to rest just a moment, but Cooler finds you and wants to Connect another attack!!!";
+        text_box(*pKeepTextOfTextBox);
         break;
     case 2:
-
-        text_box("You get recover from the attack and watch that Cooler wants to Keep punchin you!!");
+        *pKeepTextOfTextBox = "You get recover from the attack and watch that Cooler wants to Keep punchin you!!";
+        text_box(*pKeepTextOfTextBox);
         break;
     case 3:
-        text_box("You Keep punching Cooler, but then Cooler Dodges one of your attacks and try to punch you!!!");
+        *pKeepTextOfTextBox = "You Keep punching Cooler, but then Cooler Dodges one of your attacks and try to punch you!!!";
+        text_box(*pKeepTextOfTextBox);
         break;
     case 4:
-        text_box("Cooler is getting closer to you!!!");
+        *pKeepTextOfTextBox = "Cooler is getting closer to you!!!";
+        text_box(*pKeepTextOfTextBox);
         break;
     case 5:
 
         exit(0);
         break;
-    
-    default:
-        break;
     }
-    Decisions();
-    
 
-    
+    Decisions(*pKeepTextOfTextBox);
+    system("cls");
+
+            
     return 0;
     
 }

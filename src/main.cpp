@@ -23,17 +23,25 @@ public:
 
 void RecoverStamina()
 {
-    Stamina = Stamina + 1;
+    if (Stamina != 6)
+    {
+        Stamina = Stamina + 1;
+    }
 }
 
 void Dodge()
-{
-    Stamina = Stamina - 2;
+{   
+    if (Stamina >= 2)
+    {
+        Stamina = Stamina - 2;
+    }
 }
 
-void getStamina()
+int getStamina()
 {
     cout << "Stamina: " << Stamina << "\n";
+
+    return Stamina;
 }
 
 void LoseLife(int Value)
@@ -50,17 +58,26 @@ void getLife()
 
 void LoseKi(int Value)
 {
-    Ki = Ki - Value;
+    if (Value <= Ki)
+    {
+        Ki = Ki - Value;
+    }
+    
 }
 
 void getKi()
 {
-    cout << "Ki: " << Ki << "\n";;
+    cout << "Ki: " << Ki << "\n";
 }
 
 void RecoverKi(int Value)
 {
     Ki = Ki + Value;    
+}
+
+int getKiForControlStatements()
+{
+    return Ki;
 }
 
 };
@@ -158,6 +175,7 @@ void Decisions(string Text)
             Loop = false;
         }
     }
+    system("cls");
 
 }
 
@@ -181,6 +199,8 @@ int main()
     CharacterSelection();
     system("cls");
 
+            // Attack SCENE #1
+
     *pKeepTextOfTextBox = "Cooler lunges at you looking to connect a blow!!!!!";
     Decisions(*pKeepTextOfTextBox);
         
@@ -194,6 +214,8 @@ int main()
 
         text_box("You tried to launch ki blast at Cooler, but that was not enough to make him step back, causing Cooler to punch you in the face, sending you at a bunch of rocks, causing great damage");
         NewEvents.LoseLife(25);
+        NewEvents.LoseKi(2);
+        NewEvents.getKi();
         break;
     case 3:
         text_box("Cooler tried to punch you, but you dodge it to attack him from behind");
@@ -201,7 +223,7 @@ int main()
         break;
     case 4:
         text_box("You made yourself stronger than before making your Ki go up, but same time making Cooler angrier");
-        NewEvents.RecoverKi(20);
+        NewEvents.RecoverKi(10);
         NewEvents.getKi();
         break;
 
@@ -214,6 +236,8 @@ int main()
     cin.get();
     system("cls");
     
+        //Cinematic SCENE #1
+
     switch (*pDecision)
     {
     case 1:
@@ -225,7 +249,7 @@ int main()
         text_box(*pKeepTextOfTextBox);
         break;
     case 3:
-        *pKeepTextOfTextBox = "You Keep punching Cooler, but then Cooler Dodges one of your attacks and try to punch you!!!";
+        *pKeepTextOfTextBox = "You Keep punching Cooler, but then Cooler Dodges one of your attacks and tries to punch you!!!";
         text_box(*pKeepTextOfTextBox);
         break;
     case 4:
@@ -238,10 +262,134 @@ int main()
         break;
     }
 
+        //Attack SCENE #2
+
     Decisions(*pKeepTextOfTextBox);
     system("cls");
 
-            
+    switch (*pDecision)
+    {
+    case 1:
+        *pKeepTextOfTextBox = "You attacked him aswell, for luck you connect more hits than him, causing great damage to him!!!";
+        text_box(*pKeepTextOfTextBox);
+        NewEvents.LoseLife(5);
+        NewEvents.RecoverStamina();
+        break;
+    case 2:
+        *pKeepTextOfTextBox = "That is not effective on him, which causes him to keep hitting you, causing more damage.";
+        text_box(*pKeepTextOfTextBox);
+        NewEvents.LoseLife(15);
+        NewEvents.LoseKi(2);
+        NewEvents.getKi();
+        NewEvents.RecoverStamina();
+        break;
+    case 3:
+        *pKeepTextOfTextBox = "You dodge him again to keep punching him";
+        text_box(*pKeepTextOfTextBox);
+        NewEvents.Dodge();
+        break;
+    case 4:
+        *pKeepTextOfTextBox = "You decided to keep charging Ki causing that Cooler can punch you directly on the face, causing great damage";
+        text_box(*pKeepTextOfTextBox);
+        NewEvents.RecoverKi(10);
+        NewEvents.getKi();
+        NewEvents.LoseLife(15);
+        break;
+    case 5:
+
+        exit(0);
+        break;
+    }
+    cin.ignore();
+    cin.get();
+    system("cls");
+
+        //Cinematic SCENE #2
+
+    switch (*pDecision)
+    {
+    case 1:   
+        *pKeepTextOfTextBox = "Cooler increases its power even further beyond decided to Kill you and he goes right to your position!!!";
+        text_box(*pKeepTextOfTextBox);
+        break;
+    case 2:
+        *pKeepTextOfTextBox = "You get recover from the attack and watch that Cooler wants to Keep punchin you!!";
+        text_box(*pKeepTextOfTextBox);
+        break;
+    case 3:
+        *pKeepTextOfTextBox = "You Keep punching Cooler, but then Cooler Dodges one of your attacks and tries to punch you again!!!";
+        text_box(*pKeepTextOfTextBox);
+        break;
+    case 4:
+        *pKeepTextOfTextBox = "Cooler is getting closer to you to attack again!!!";
+        text_box(*pKeepTextOfTextBox);
+        break;
+    case 5:
+
+        exit(0);
+        break;
+    }
+
+        //Attack SCENE #3
+
+    Decisions(*pKeepTextOfTextBox);
+    system("cls");
+
+    switch (*pDecision)
+    {
+    case 1:
+        *pKeepTextOfTextBox = "You Keep attacking causing more more damage, but causing a great damage to you!!!";
+        text_box(*pKeepTextOfTextBox);
+        NewEvents.LoseLife(20);
+        NewEvents.RecoverStamina();
+        break;
+    case 2:
+        
+        if (NewEvents.getKiForControlStatements() >= 15 )
+        {
+            *pKeepTextOfTextBox = "Your charged a great Ki attack causing great great damage against him";
+            text_box(*pKeepTextOfTextBox);
+            NewEvents.LoseKi(15);
+            NewEvents.getKi();
+        }
+        else if (NewEvents.getKiForControlStatements() >= 10 )
+        {
+            *pKeepTextOfTextBox = "Your charged a Ki attack causing great damage against him";
+            text_box(*pKeepTextOfTextBox);
+            NewEvents.LoseKi(10);
+            NewEvents.getKi();
+        }
+        else if (NewEvents.getKiForControlStatements() < 10)
+        {
+            *pKeepTextOfTextBox = "Your had not enough Ki to attack him so he punched again....";
+            text_box(*pKeepTextOfTextBox);
+            NewEvents.LoseLife(15);
+            NewEvents.getKi();
+            NewEvents.RecoverStamina();
+        }
+
+        break;
+    case 3:
+        *pKeepTextOfTextBox = "You dodge him again";
+        text_box(*pKeepTextOfTextBox);
+        NewEvents.Dodge();
+        break;
+    case 4:
+        *pKeepTextOfTextBox = "You decided to charge Ki causing that Cooler can punch you directly on the face, causing great damage";
+        text_box(*pKeepTextOfTextBox);
+        NewEvents.LoseLife(25);
+        NewEvents.RecoverKi(10);
+        break;
+    case 5:
+
+        exit(0);
+        break;
+    }
+    cin.ignore();
+    cin.get();
+    system("cls");
+
+
     return 0;
     
 }

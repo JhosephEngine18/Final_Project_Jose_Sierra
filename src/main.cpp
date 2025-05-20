@@ -3,27 +3,30 @@ Universidad Amerike
 Author: José Sierra
 Final Project
 Date: 28/04/25
-Description: This codes uses contructors with default parameters
+Description: This is my final project
 */
 
 #include <iostream>
 #include <limits>
 using namespace std;
 
+//These variables are used to determine which direction the game will play
 int Decision = 0;
 int *pDecision = &Decision;
 int Race = 0;
+
+//This Class is used to modify values of the character
 class Events
 {
 private:
     int Life = 100;
     int Ki = 5;
-    int Stamina = 6;
+    int Stamina = 4;
 public:
 
 void RecoverStamina()
 {
-    if (Stamina != 6)
+    if (Stamina != 4)
     {
         Stamina = Stamina + 1;
     }
@@ -46,6 +49,23 @@ int getStamina()
 
 void LoseLife(int Value)
 {
+    bool Loop = true;
+    if (Value > Life)
+    {
+        while (Loop)
+        {
+            Value = Value - 1;
+            
+            if (Value == Life)
+            {
+                Loop = false;
+            }
+            
+        }
+        
+        
+    }
+    
     Life = Life - Value;
 
     cout << "Life left: " << Life << "\n";
@@ -54,6 +74,11 @@ void LoseLife(int Value)
 void getLife()
 {
     cout << "Life: " << Life << "\n";;
+}
+
+int getLifeForControlStatements()
+{
+    return Life;
 }
 
 void LoseKi(int Value)
@@ -136,7 +161,7 @@ void CharacterSelection()
 
 Events NewEvents;
 
-//This function automates the way the selection boxes for actions are structured.
+//This function automates the way of the selection boxes for actions are structured.
 void Decisions(string Text)
 {
     bool Loop = true;
@@ -154,6 +179,47 @@ void Decisions(string Text)
         special_text_box("3-Dodge");
         special_text_box("4-Charge Ki");
         special_text_box("5-Exit game");
+
+        cin >> *pDecision;
+
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(),'\n');
+            system("cls");
+        }
+        if (*pDecision <= 0 || *pDecision >= 6)
+        {
+            system("cls");
+            text_box("You have not selected any option");
+            cin.ignore();
+            cin.get();
+        }
+        else
+        {
+            Loop = false;
+        }
+    }
+    system("cls");
+
+}
+
+void FinalDecision(string Text)
+{
+    bool Loop = true;
+    while (Loop)
+    {
+        system("cls");
+        NewEvents.getLife();
+        NewEvents.getKi();
+        NewEvents.getStamina();
+        
+        text_box(Text);
+        text_box("What will you do?");
+        special_text_box("1-Combo Attack");
+        special_text_box("2-Kamehameha");
+        special_text_box("3-Sun");
+        special_text_box("4-Exit game");
 
         cin >> *pDecision;
 
@@ -199,7 +265,7 @@ int main()
     CharacterSelection();
     system("cls");
 
-            // Attack SCENE #1
+        // Attack SCENE #1
 
     *pKeepTextOfTextBox = "Cooler lunges at you looking to connect a blow!!!!!";
     Decisions(*pKeepTextOfTextBox);
@@ -208,12 +274,12 @@ int main()
     {
     case 1:
         text_box("You also attacked him, exchanging blows with great aggressiveness, causing a great damage to him, but also a little of damage to you.....");
-        NewEvents.LoseLife(15);
+        NewEvents.LoseLife(20);
         break;
     case 2:
 
         text_box("You tried to launch ki blast at Cooler, but that was not enough to make him step back, causing Cooler to punch you in the face, sending you at a bunch of rocks, causing great damage");
-        NewEvents.LoseLife(25);
+        NewEvents.LoseLife(30);
         NewEvents.LoseKi(2);
         NewEvents.getKi();
         break;
@@ -272,7 +338,7 @@ int main()
     case 1:
         *pKeepTextOfTextBox = "You attacked him aswell, for luck you connect more hits than him, causing great damage to him!!!";
         text_box(*pKeepTextOfTextBox);
-        NewEvents.LoseLife(5);
+        NewEvents.LoseLife(15);
         NewEvents.RecoverStamina();
         break;
     case 2:
@@ -338,32 +404,32 @@ int main()
     switch (*pDecision)
     {
     case 1:
-        *pKeepTextOfTextBox = "You Keep attacking causing more more damage, but causing a great damage to you!!!";
+        *pKeepTextOfTextBox = "You Keep attacking causing more damage, but causing a great damage to you!!!";
         text_box(*pKeepTextOfTextBox);
-        NewEvents.LoseLife(20);
+        NewEvents.LoseLife(25);
         NewEvents.RecoverStamina();
         break;
     case 2:
         
         if (NewEvents.getKiForControlStatements() >= 15 )
         {
-            *pKeepTextOfTextBox = "Your charged a great Ki attack causing great great damage against him";
+            *pKeepTextOfTextBox = "You charged a great Ki attack causing great great damage against him";
             text_box(*pKeepTextOfTextBox);
             NewEvents.LoseKi(15);
             NewEvents.getKi();
         }
         else if (NewEvents.getKiForControlStatements() >= 10 )
         {
-            *pKeepTextOfTextBox = "Your charged a Ki attack causing great damage against him";
+            *pKeepTextOfTextBox = "You charged a Ki attack causing great damage against him";
             text_box(*pKeepTextOfTextBox);
             NewEvents.LoseKi(10);
             NewEvents.getKi();
         }
         else if (NewEvents.getKiForControlStatements() < 10)
         {
-            *pKeepTextOfTextBox = "Your had not enough Ki to attack him so he punched again....";
+            *pKeepTextOfTextBox = "You had not enough Ki to attack him so he punched again....";
             text_box(*pKeepTextOfTextBox);
-            NewEvents.LoseLife(15);
+            NewEvents.LoseLife(20);
             NewEvents.getKi();
             NewEvents.RecoverStamina();
         }
@@ -378,7 +444,7 @@ int main()
         *pKeepTextOfTextBox = "You decided to charge Ki causing that Cooler can punch you directly on the face, causing great damage";
         text_box(*pKeepTextOfTextBox);
         NewEvents.LoseLife(25);
-        NewEvents.RecoverKi(10);
+        NewEvents.RecoverKi(15);
         break;
     case 5:
 
@@ -389,6 +455,119 @@ int main()
     cin.get();
     system("cls");
 
+        //Cinematic SCENE #3
+
+        switch (*pDecision)
+    {
+    case 1:   
+        *pKeepTextOfTextBox = "Cooler is getting tired of it, so he is disposed to destroy you with a powerfull attack!!!";
+        text_box(*pKeepTextOfTextBox);
+        break;
+    case 2:
+        *pKeepTextOfTextBox = "Cooler is very mad at you and its disposed to destroy the planet only for kill you!!";
+        text_box(*pKeepTextOfTextBox);
+        break;
+    case 3:
+        
+        *pKeepTextOfTextBox = "Cooler gets angrier and increases its speed so you cant dodge him causing you a lot of damage";
+        text_box(*pKeepTextOfTextBox);
+        NewEvents.LoseLife(30);
+
+    case 4:
+        *pKeepTextOfTextBox = "Cooler Laughs at you and starts to creating a powerfull attack!!!";
+        text_box(*pKeepTextOfTextBox);
+        break;
+    case 5:
+
+        exit(0);
+        break;
+    }
+    cin.ignore();
+    cin.get();
+    system("cls");
+
+    // Final SCENE
+    
+    if (NewEvents.getLifeForControlStatements() <= 30)
+    {
+        *pKeepTextOfTextBox = "You tried everything you could to defeat him... But that was not enough... You lost against Cooler, making Goku lost against Freezer and his brother, corrupting the timeline....";
+        text_box(*pKeepTextOfTextBox);
+        cin.ignore();
+        cin.get();
+        exit(0);
+    }
+    else if (NewEvents.getLifeForControlStatements() >= 35)
+    {
+        if (Race == 1)
+        {
+            *pKeepTextOfTextBox = "Somenthing deep inside of you starts to burn feeling so angry and you start to feeling stronger, an aura starts to surround you....";
+            text_box(*pKeepTextOfTextBox);
+            cin.ignore();
+            cin.get();
+            system("cls");
+            system("COLOR 0E");
+            *pKeepTextOfTextBox = "You Transformed into a Super Saiyan!!!!";
+            text_box(*pKeepTextOfTextBox);
+            cin.ignore();
+            cin.get();
+            system("cls");
+            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thing you can thing is only destroy Cooler";
+            text_box(*pKeepTextOfTextBox);
+            cin.ignore();
+            cin.get();
+            system("cls");
+            *pKeepTextOfTextBox = "This will be your final attack";
+            FinalDecision(*pKeepTextOfTextBox);
+            switch (*pDecision)
+            {
+            case 1:   
+                *pKeepTextOfTextBox = "You attacked Cooler before he could launch its attack, with no mercy, you maked him fall to its dead inside of the planet";
+                text_box(*pKeepTextOfTextBox);
+                break;
+            case 2:
+                *pKeepTextOfTextBox = "You charged a powerfull Kamehameha making the SuperNova of Cooler get back to him, eliminating him in the process";
+                text_box(*pKeepTextOfTextBox);
+                break;
+            case 3:
+                
+                *pKeepTextOfTextBox = "You attacked Cooler causing cancel its attack and you make him fly away, taking the oportunity to charge a Kamehameha and send him at the Sun";
+                text_box(*pKeepTextOfTextBox);
+
+            case 4:
+                exit(0);
+                break;
+            }
+            cin.ignore();
+            cin.get();
+            system("cls");
+        }
+        else if (Race == 2)
+        {
+            
+        }
+        else if (Race == 3)
+        {
+            /* code */
+        }
+        
+        *pKeepTextOfTextBox = "Thanks to you the time line is safe again helping Goku with Freezers brother and dont let him destroy the time line";
+        text_box(*pKeepTextOfTextBox);
+        cin.ignore();
+        cin.get();
+        special_text_box("The End");
+        cin.ignore();
+        cin.get();
+        
+
+    }
+    
+    else if (NewEvents.getLifeForControlStatements() > 60)
+    {
+        *pKeepTextOfTextBox = "Cooler was trying to charge his super attack when you managed to attack him from behind sending him to the center of the planet where he dies desintegrated";
+        text_box(*pKeepTextOfTextBox);
+    }
+    
+    system("COLOR 0F");
 
     return 0;
     

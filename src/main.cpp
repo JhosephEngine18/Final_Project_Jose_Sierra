@@ -658,10 +658,6 @@ int main()
         cout << "//Press Enter to Continue//\n";
         cin.ignore();
         cin.get();
-        special_text_box("The End");
-        cin.ignore();
-        cin.get();
-        
 
     }
     //Good Enging
@@ -679,10 +675,12 @@ int main()
         cout << "//Press Enter to Continue//\n";
         cin.ignore();
         cin.get();
-        text_box("The End");
-        cin.ignore();
-        cin.get();
     }
+
+    //This indicates the end of the game
+    text_box("The End");
+    cin.ignore();
+    cin.get();
     
     return 0;
     

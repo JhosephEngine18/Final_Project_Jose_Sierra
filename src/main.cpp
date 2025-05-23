@@ -24,6 +24,7 @@ private:
     int Stamina = 4;
 public:
 
+//This method increases stamina value every time is called for game narrative
 void RecoverStamina()
 {
     if (Stamina != 4)
@@ -32,6 +33,7 @@ void RecoverStamina()
     }
 }
 
+//This method decreases Dodge value every time is called for game narrative
 void Dodge()
 {   
     if (Stamina >= 2)
@@ -40,6 +42,7 @@ void Dodge()
     }
 }
 
+//This method prints into the console the value of Stamina and returns its value also;
 int getStamina()
 {
     cout << "Stamina: " << Stamina << "\n";
@@ -47,23 +50,12 @@ int getStamina()
     return Stamina;
 }
 
+//This method helps me to decrease Life Value
 void LoseLife(int Value)
 {
-    bool Loop = true;
     if (Value > Life)
     {
-        while (Loop)
-        {
-            Value = Value - 1;
-            
-            if (Value == Life)
-            {
-                Loop = false;
-            }
-            
-        }
-        
-        
+        Value = Life;
     }
     
     Life = Life - Value;
@@ -71,16 +63,19 @@ void LoseLife(int Value)
     cout << "Life left: " << Life << "\n";
 }
 
+//This method prints Life Value into the console
 void getLife()
 {
     cout << "Life: " << Life << "\n";;
 }
 
+//This method gives to me the value of Life for control statements
 int getLifeForControlStatements()
 {
     return Life;
 }
 
+//This method helps me to decrease the value of Ki
 void LoseKi(int Value)
 {
     if (Value <= Ki)
@@ -89,17 +84,20 @@ void LoseKi(int Value)
     }
     
 }
-
+//This method prints in the console the value of Ki
 void getKi()
 {
     cout << "Ki: " << Ki << "\n";
 }
 
+//This method helps to me to control the value of Ki to increase it
 void RecoverKi(int Value)
 {
     Ki = Ki + Value;    
 }
 
+
+//This method gives to me the value of Ki for some Control Statements
 int getKiForControlStatements()
 {
     return Ki;
@@ -161,7 +159,7 @@ void CharacterSelection()
 
 Events NewEvents;
 
-//This function automates the way of the selection boxes for actions are structured.
+//This function automates the way of the selection boxes for actions are structured and its parameter is to keep the actual context of the game.
 void Decisions(string Text)
 {
     bool Loop = true;
@@ -204,6 +202,7 @@ void Decisions(string Text)
 
 }
 
+//This function is called for the end of the story, specifically for special endings
 void FinalDecision(string Text)
 {
     bool Loop = true;
@@ -217,7 +216,7 @@ void FinalDecision(string Text)
         text_box(Text);
         text_box("What will you do?");
         special_text_box("1-Combo Attack");
-        special_text_box("2-Kamehameha");
+        special_text_box("2-Super Ki Attack");
         special_text_box("3-Sun");
         special_text_box("4-Exit game");
 
@@ -248,6 +247,7 @@ void FinalDecision(string Text)
 
 int main()
 {
+    //This Variable helps me to keep every text typed in this code, specifically to not lose the actual Case
     string KeepTextOfTextBox;
     string *pKeepTextOfTextBox = &KeepTextOfTextBox;
     system("cls");
@@ -261,6 +261,7 @@ int main()
     text_box("Your duty will be to help Goku defeat Cooler and weaken Freezer enough for Goku to defeat him.");
     cout << "\n";
     text_box("But be careful if you make the mistake of not letting history fluctuate as it should, the consequences can be dire......");
+    cout << "//Press Enter to Continue//\n";
     cin.get();
     CharacterSelection();
     system("cls");
@@ -298,6 +299,7 @@ int main()
         exit(0);
         break;
     }
+    cout << "//Press Enter to Continue//\n";
     cin.ignore();
     cin.get();
     system("cls");
@@ -366,6 +368,7 @@ int main()
         exit(0);
         break;
     }
+    cout << "//Press Enter to Continue//\n";
     cin.ignore();
     cin.get();
     system("cls");
@@ -451,6 +454,7 @@ int main()
         exit(0);
         break;
     }
+    cout << "//Press Enter to Continue//\n";
     cin.ignore();
     cin.get();
     system("cls");
@@ -472,6 +476,7 @@ int main()
         *pKeepTextOfTextBox = "Cooler gets angrier and increases its speed so you cant dodge him causing you a lot of damage";
         text_box(*pKeepTextOfTextBox);
         NewEvents.LoseLife(30);
+        break;
 
     case 4:
         *pKeepTextOfTextBox = "Cooler Laughs at you and starts to creating a powerfull attack!!!";
@@ -482,37 +487,44 @@ int main()
         exit(0);
         break;
     }
+    cout << "//Press Enter to Continue//\n";
     cin.ignore();
     cin.get();
     system("cls");
 
     // Final SCENE
     
+    //Bad Ending
     if (NewEvents.getLifeForControlStatements() <= 30)
     {
         *pKeepTextOfTextBox = "You tried everything you could to defeat him... But that was not enough... You lost against Cooler, making Goku lost against Freezer and his brother, corrupting the timeline....";
         text_box(*pKeepTextOfTextBox);
+        cout << "//Press Enter to Continue//\n";
         cin.ignore();
         cin.get();
         exit(0);
     }
+    //Special Endings
     else if (NewEvents.getLifeForControlStatements() >= 35)
     {
         if (Race == 1)
         {
-            *pKeepTextOfTextBox = "Somenthing deep inside of you starts to burn feeling so angry and you start to feeling stronger, an aura starts to surround you....";
+            *pKeepTextOfTextBox = "Somenthing deep inside of you starts to burn feeling so angry and you start to feeling stronger, a Golden aura starts to surround you....";
             text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
             cin.ignore();
             cin.get();
             system("cls");
             system("COLOR 0E");
             *pKeepTextOfTextBox = "You Transformed into a Super Saiyan!!!!";
             text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
             cin.ignore();
             cin.get();
             system("cls");
             *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thing you can thing is only destroy Cooler";
             text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
             cin.ignore();
             cin.get();
             system("cls");
@@ -532,26 +544,118 @@ int main()
                 
                 *pKeepTextOfTextBox = "You attacked Cooler causing cancel its attack and you make him fly away, taking the oportunity to charge a Kamehameha and send him at the Sun";
                 text_box(*pKeepTextOfTextBox);
+                break;
 
             case 4:
                 exit(0);
                 break;
             }
+            cout << "//Press Enter to Continue//\n";
             cin.ignore();
             cin.get();
             system("cls");
         }
         else if (Race == 2)
         {
-            
+            *pKeepTextOfTextBox = "Somenthing deep inside of you starts to burn feeling so angry and you start to feeling stronger, aura starts to surround you....";
+            text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
+            cin.ignore();
+            cin.get();
+            system("cls");
+            system("COLOR 0C");
+            *pKeepTextOfTextBox = "You power has increased!!!";
+            text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
+            cin.ignore();
+            cin.get();
+            system("cls");
+            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thing you can thing is only destroy Cooler";
+            text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
+            cin.ignore();
+            cin.get();
+            system("cls");
+            *pKeepTextOfTextBox = "This will be your final attack";
+            FinalDecision(*pKeepTextOfTextBox);
+            switch (*pDecision)
+            {
+            case 1:   
+                *pKeepTextOfTextBox = "You attacked Cooler before he could launch its attack making him fly away into a portal";
+                text_box(*pKeepTextOfTextBox);
+                break;
+            case 2:
+                *pKeepTextOfTextBox = "You charged a powerfull attack making the SuperNova of Cooler get back to him, eliminating him in the process";
+                text_box(*pKeepTextOfTextBox);
+                break;
+            case 3:
+                
+                *pKeepTextOfTextBox = "You attacked Cooler were way faster than Cooler to launch its attack, making Cooler fly away and crashing out against the sun";
+                text_box(*pKeepTextOfTextBox);
+                break;
+
+            case 4:
+                exit(0);
+                break;
+            }
+            cout << "//Press Enter to Continue//\n";
+            cin.ignore();
+            cin.get();
+            system("cls");
         }
         else if (Race == 3)
         {
-            /* code */
+            *pKeepTextOfTextBox = "Somenthing deep inside of you starts to burn feeling so angry and you start to feeling stronger, aura starts to surround you....";
+            text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
+            cin.ignore();
+            cin.get();
+            system("cls");
+            system("COLOR 0D");
+            *pKeepTextOfTextBox = "You power has increased unmeasurely!!!";
+            text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
+            cin.ignore();
+            cin.get();
+            system("cls");
+            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thing you can thing is only destroy Cooler";
+            text_box(*pKeepTextOfTextBox);
+            cout << "//Press Enter to Continue//\n";
+            cin.ignore();
+            cin.get();
+            system("cls");
+            *pKeepTextOfTextBox = "This will be your final attack";
+            FinalDecision(*pKeepTextOfTextBox);
+            switch (*pDecision)
+            {
+            case 1:   
+                *pKeepTextOfTextBox = "You did not let Cooler do anything against you, recieving multiple attacks until he disappeared";
+                text_box(*pKeepTextOfTextBox);
+                break;
+            case 2:
+                *pKeepTextOfTextBox = "You charged a powerfull attack behind Coolers back making him get disintegrated";
+                text_box(*pKeepTextOfTextBox);
+                break;
+            case 3:
+                
+                *pKeepTextOfTextBox = "You Grabbed Cooler and started to fly into the space to making him fly away againts the sun and get disintegrated in the process";
+                text_box(*pKeepTextOfTextBox);
+                break;
+
+            case 4:
+                exit(0);
+                break;
+            }
+            cout << "//Press Enter to Continue//\n";
+            cin.ignore();
+            cin.get();
+            system("cls");
         }
         
+        system("COLOR 0F");
         *pKeepTextOfTextBox = "Thanks to you the time line is safe again helping Goku with Freezers brother and dont let him destroy the time line";
         text_box(*pKeepTextOfTextBox);
+        cout << "//Press Enter to Continue//\n";
         cin.ignore();
         cin.get();
         special_text_box("The End");
@@ -560,15 +664,26 @@ int main()
         
 
     }
-    
+    //Good Enging
     else if (NewEvents.getLifeForControlStatements() > 60)
     {
-        *pKeepTextOfTextBox = "Cooler was trying to charge his super attack when you managed to attack him from behind sending him to the center of the planet where he dies desintegrated";
+        *pKeepTextOfTextBox = "Cooler was trying to charge his super attack when you managed to attack him from behind sending him to the center of the planet where he dies disintegrated";
         text_box(*pKeepTextOfTextBox);
+        cout << "//Press Enter to Continue//\n";
+        cin.ignore();
+        cin.get();
+
+        system("COLOR 0F");
+        *pKeepTextOfTextBox = "Thanks to you the time line is safe again helping Goku with Freezers brother and dont let him destroy the time line";
+        text_box(*pKeepTextOfTextBox);
+        cout << "//Press Enter to Continue//\n";
+        cin.ignore();
+        cin.get();
+        text_box("The End");
+        cin.ignore();
+        cin.get();
     }
     
-    system("COLOR 0F");
-
     return 0;
     
 }

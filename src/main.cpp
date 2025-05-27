@@ -19,6 +19,7 @@ int Race = 0;
 class Events
 {
 private:
+    //These variables are the Player Stadistics
     int Life = 100;
     int Ki = 5;
     int Stamina = 4;
@@ -50,7 +51,7 @@ int getStamina()
     return Stamina;
 }
 
-//This method helps me to decrease Life Value
+//This method helps me to decrease Lifes Value
 void LoseLife(int Value)
 {
     if (Value > Life)
@@ -63,7 +64,7 @@ void LoseLife(int Value)
     cout << "Life left: " << Life << "\n";
 }
 
-//This method prints Life Value into the console
+//This method prints Lifes Value into the console
 void getLife()
 {
     cout << "Life: " << Life << "\n";;
@@ -157,6 +158,21 @@ void CharacterSelection()
     
 }
 
+//This function helps the player to learn how to play
+void Instructions()
+{
+    system("cls");
+    special_text_box("INSTRUCTIONS");
+    text_box("To play this game you will see a menu like this to select some options.");
+    text_box("To select an option, type on your keyboard only the number indicated on the left side of the option. If you type a number that is not within the options, it will be automatically rejected.");
+    special_text_box("1-(Example)");
+    special_text_box("2-(Example)");
+    special_text_box("3-(Example)");
+    cin.ignore();
+    cin.get();
+}
+
+//New Events is an object from the class "Events" used for modify player stadistics
 Events NewEvents;
 
 //This function automates the way of the selection boxes for actions are structured and its parameter is to keep the actual context of the game.
@@ -263,6 +279,7 @@ int main()
     text_box("But be careful if you make the mistake of not letting history fluctuate as it should, the consequences can be dire......");
     cout << "//Press Enter to Continue//\n";
     cin.get();
+    Instructions();
     CharacterSelection();
     system("cls");
 
@@ -270,7 +287,7 @@ int main()
 
     *pKeepTextOfTextBox = "Cooler lunges at you looking to connect a blow!!!!!";
     Decisions(*pKeepTextOfTextBox);
-        
+    //Each of these switches helps me to build every single action of the player
     switch (*pDecision)
     {
     case 1:
@@ -300,6 +317,7 @@ int main()
         break;
     }
     cout << "//Press Enter to Continue//\n";
+    //cin.ignore() and cin.get() are used for ask the user input the Keybind Enter
     cin.ignore();
     cin.get();
     system("cls");
@@ -522,7 +540,7 @@ int main()
             cin.ignore();
             cin.get();
             system("cls");
-            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thing you can thing is only destroy Cooler";
+            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thin you can think is destroy Cooler";
             text_box(*pKeepTextOfTextBox);
             cout << "//Press Enter to Continue//\n";
             cin.ignore();
@@ -570,7 +588,7 @@ int main()
             cin.ignore();
             cin.get();
             system("cls");
-            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thing you can thing is only destroy Cooler";
+            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thin you can think is destroy Cooler";
             text_box(*pKeepTextOfTextBox);
             cout << "//Press Enter to Continue//\n";
             cin.ignore();
@@ -618,7 +636,7 @@ int main()
             cin.ignore();
             cin.get();
             system("cls");
-            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thing you can thing is only destroy Cooler";
+            *pKeepTextOfTextBox = "Cooler and Freezer looked at you terrified, the only thin you can think is destroy Cooler";
             text_box(*pKeepTextOfTextBox);
             cout << "//Press Enter to Continue//\n";
             cin.ignore();

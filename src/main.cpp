@@ -294,7 +294,7 @@ int main()
     {
     case 1:
         text_box("You also attacked him, exchanging blows with great aggressiveness, causing a great damage to him, but also a little of damage to you.....");
-        NewEvents.LoseLife(20);
+        NewEvents.LoseLife(25);
         break;
     case 2:
 
@@ -360,13 +360,13 @@ int main()
     case 1:
         *pKeepTextOfTextBox = "You attacked him aswell, for luck you connect more hits than him, causing great damage to him!!!";
         text_box(*pKeepTextOfTextBox);
-        NewEvents.LoseLife(15);
+        NewEvents.LoseLife(20);
         NewEvents.RecoverStamina();
         break;
     case 2:
         *pKeepTextOfTextBox = "That is not effective on him, which causes him to keep hitting you, causing more damage.";
         text_box(*pKeepTextOfTextBox);
-        NewEvents.LoseLife(15);
+        NewEvents.LoseLife(25);
         NewEvents.LoseKi(2);
         NewEvents.getKi();
         NewEvents.RecoverStamina();
@@ -495,7 +495,7 @@ int main()
         
         *pKeepTextOfTextBox = "Cooler gets angrier and increases its speed so you cant dodge him causing you a lot of damage";
         text_box(*pKeepTextOfTextBox);
-        NewEvents.LoseLife(30);
+        NewEvents.LoseLife(20);
         break;
 
     case 4:
@@ -515,7 +515,7 @@ int main()
     // Final SCENE
     
     //Good Ending
-    if (NewEvents.getLifeForControlStatements() > 60)
+    if (NewEvents.getLifeForControlStatements() > 45)
     {
         *pKeepTextOfTextBox = "Cooler was trying to charge his super attack when you managed to attack him from behind sending him to the center of the planet where he dies disintegrated";
         text_box(*pKeepTextOfTextBox);

@@ -168,6 +168,7 @@ void Instructions()
     special_text_box("1-(Example)");
     special_text_box("2-(Example)");
     special_text_box("3-(Example)");
+    cout << "//Press Enter to Continue//\n";
     cin.ignore();
     cin.get();
 }
@@ -266,6 +267,7 @@ int main()
     //This Variable helps me to keep every text typed in this code, specifically to not lose the actual Case
     string KeepTextOfTextBox;
     string *pKeepTextOfTextBox = &KeepTextOfTextBox;
+    system("COLOR 0F");
     system("cls");
     text_box("You are a time patroller whose duty is to prevent bad people from altering the main time line");
     text_box("they called you to let you know that someone has broken into the sacred timeline in the year 762");
@@ -512,15 +514,21 @@ int main()
 
     // Final SCENE
     
-    //Bad Ending
-    if (NewEvents.getLifeForControlStatements() <= 30)
+    //Good Ending
+    if (NewEvents.getLifeForControlStatements() > 60)
     {
-        *pKeepTextOfTextBox = "You tried everything you could to defeat him... But that was not enough... You lost against Cooler, making Goku lost against Freezer and his brother, corrupting the timeline....";
+        *pKeepTextOfTextBox = "Cooler was trying to charge his super attack when you managed to attack him from behind sending him to the center of the planet where he dies disintegrated";
         text_box(*pKeepTextOfTextBox);
         cout << "//Press Enter to Continue//\n";
         cin.ignore();
         cin.get();
-        exit(0);
+
+        system("COLOR 0F");
+        *pKeepTextOfTextBox = "Thanks to you the time line is safe again helping Goku with Freezers brother and dont let him destroy the time line";
+        text_box(*pKeepTextOfTextBox);
+        cout << "//Press Enter to Continue//\n";
+        cin.ignore();
+        cin.get();
     }
     //Special Endings
     else if (NewEvents.getLifeForControlStatements() >= 35) //Final Saiyan Race
@@ -678,21 +686,15 @@ int main()
         cin.get();
 
     }
-    //Good Enging
-    else if (NewEvents.getLifeForControlStatements() > 60)
+    //Bad Ending
+    else if (NewEvents.getLifeForControlStatements() <= 30)
     {
-        *pKeepTextOfTextBox = "Cooler was trying to charge his super attack when you managed to attack him from behind sending him to the center of the planet where he dies disintegrated";
+        *pKeepTextOfTextBox = "You tried everything you could to defeat him... But that was not enough... You lost against Cooler, making Goku lost against Freezer and his brother, corrupting the timeline....";
         text_box(*pKeepTextOfTextBox);
         cout << "//Press Enter to Continue//\n";
         cin.ignore();
         cin.get();
-
-        system("COLOR 0F");
-        *pKeepTextOfTextBox = "Thanks to you the time line is safe again helping Goku with Freezers brother and dont let him destroy the time line";
-        text_box(*pKeepTextOfTextBox);
-        cout << "//Press Enter to Continue//\n";
-        cin.ignore();
-        cin.get();
+        exit(0);
     }
 
     //This indicates the end of the game

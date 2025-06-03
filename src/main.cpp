@@ -523,7 +523,7 @@ int main()
         exit(0);
     }
     //Special Endings
-    else if (NewEvents.getLifeForControlStatements() >= 35)
+    else if (NewEvents.getLifeForControlStatements() >= 35) //Final Saiyan Race
     {
         if (Race == 1)
         {
@@ -573,7 +573,7 @@ int main()
             cin.get();
             system("cls");
         }
-        else if (Race == 2)
+        else if (Race == 2) //Final Namekian Race
         {
             *pKeepTextOfTextBox = "Somenthing deep inside of you starts to burn feeling so angry and you start to feeling stronger, aura starts to surround you....";
             text_box(*pKeepTextOfTextBox);
@@ -621,7 +621,7 @@ int main()
             cin.get();
             system("cls");
         }
-        else if (Race == 3)
+        else if (Race == 3) //Final Freezer Race
         {
             *pKeepTextOfTextBox = "Somenthing deep inside of you starts to burn feeling so angry and you start to feeling stronger, aura starts to surround you....";
             text_box(*pKeepTextOfTextBox);
